@@ -1,18 +1,25 @@
-const Card = ({ item }) => {
+const Card = ({ item, onRemove = () => {} }) => {
     const keywords = item?.title?.split(" ").join(",");
 
     return (
-        <div class="card" style={{ width: "25%", padding: 0 }}>
+        <div
+            id={item?.id}
+            className="card"
+            style={{ width: "25%", padding: 0 }}
+        >
             <img
                 src={`https://loremflickr.com/320/240/${keywords}`}
-                class="card-img-top"
+                className="card-img-top"
                 alt="Tênis Nike"
             />
-            <div class="card-body">
-                <h5 class="card-title">{item?.title}</h5>
-                <a href="#" class="btn btn-danger">
+            <div className="card-body">
+                <h5 className="card-title">{item?.title}</h5>
+                <button
+                    onClick={() => onRemove(item?.id)}
+                    className="btn btn-danger"
+                >
                     Remover da lista
-                </a>
+                </button>
             </div>
         </div>
     );

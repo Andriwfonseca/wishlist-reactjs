@@ -18,6 +18,18 @@ const List = () => {
         };
 
         setWishList([...wishList, newWishItem]);
+        setWishItem("");
+    };
+
+    const removeWishItem = (id) => {
+        const removeConfirm = window.confirm(
+            "Tem certeza que deseja remover esse desejo?"
+        );
+
+        if (removeConfirm) {
+            const newWishList = wishList?.filter((item) => item?.id != id);
+            setWishList(newWishList);
+        }
     };
 
     return (
@@ -29,6 +41,7 @@ const List = () => {
                         type="text"
                         class="form-control"
                         placeholder="Adicione um desejo"
+                        value={wishItem}
                         onChange={(e) => {
                             setWishItem(e.target.value);
                         }}
@@ -44,7 +57,7 @@ const List = () => {
             </div>
             <div className="row mt-5">
                 {wishList?.map((item) => (
-                    <Card item={item} />
+                    <Card item={item} onRemove={(id) => removeWishItem(id)} />
                 ))}
             </div>
         </div>
